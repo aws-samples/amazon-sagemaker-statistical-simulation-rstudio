@@ -8,7 +8,7 @@ RStudio is a great IDE for data scientists and statisticians who code in R. You 
 
 We will deploy the resources using cloudformation in us-west-2 region to your Event Engine account. Please navigate to [CloudFormation console](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template), select **Template is ready**, **Upload a template file**, and **Choose file** to upload the template yaml file [ec2_rstudio_sagemaker.yaml](./ec2_rstudio_sagemaker.yaml) provided to you. Hit **Next** to continue.
 
-![image](./docs/cloudformation_1.png)
+![image](./doc/cloudformation_1.png)
 
 In Step 2 **Specify stack details**, you will be prompted to enter a **Stack name** and an **EC2 key pair**. Pick any name and select the key pair *ee-default-keypair.pem* from Event Engine then hit **Next**. 
 
@@ -16,11 +16,11 @@ In Step 3 **Configure stack options** page, we will bypass any options and keep 
 
 In Step 4 **Review**, please acknowledge and hit **Create Stack**. The stack creation will take about 5 minutes to get EC2 instance up and running, and another 5-10 minutes for RStudio to install some prerequisites.
 
-![image](./docs/cloudformation_4.png)
+![image](./doc/cloudformation_4.png)
 
 Once the stack creation completes, go to **Output** tab to find the RStudio IDE login URL: ec2-xx-xxx-xxx-xxx.us-west-2.compute.amazonaws.com:8787. Copy the URL and paste it in your favorite browser. 
 
-![cloudformation_5](/Users/mengkanh/Repositories/HCLS-ML-Artifacts/JJ_SageMaker_Rstudio_Processing/docs/cloudformation_5.png)
+![cloudformation_5](./doc/cloudformation_5.png)
 
 Login the RStudio instance with username **rstudio** and password **rstudio**. [Note that this is a temporary environment for demonstration purposes. The use of public facing EC2 instance and simple login credential is *NOT* the best security practice to host your RStudio instance.]
 
@@ -30,7 +30,7 @@ Login the RStudio instance with username **rstudio** and password **rstudio**. [
 
 Docker is a software platform that allows you to build, test, and deploy applications quickly. Docker packages software into standardized units called containers that have everything the software needs to run including libraries, system tools, code, and runtime. Using Docker, you can quickly deploy and scale applications into any environment and know your code will run. 
 
-![image](./docs/docker_container_1.png)
+![image](./doc/docker_container_1.png)
 
 A Docker image is a read-only template that defines your container. The image contains the code that will run including any definitions for any libraries and dependancies your code needs. A Docker container is an instantiated (running) Docker image. AWS provides [Amazon Elastic Container Registry (ECR)](https://aws.amazon.com/ecr/), an image registry for storing and quickly retrieving Docker images.
 
@@ -159,7 +159,7 @@ While the `Social_Distancing_Simulation.R` is executed within the container, the
 
 Once we completed the workshop, please delete the stack from the [CloudFormation console](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks) by selecting the stack and hit **Delete**. This will clean up all the resources we have created for the workshop.
 
-![cloudformation_6](/Users/mengkanh/Repositories/HCLS-ML-Artifacts/JJ_SageMaker_Rstudio_Processing/docs/cloudformation_6.png)
+![cloudformation_6](./doc/cloudformation_6.png)
 
 
 
