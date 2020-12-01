@@ -6,11 +6,12 @@ RStudio is a great IDE for data scientists and statisticians who code in R. You 
 
 ### Lab 1: Deploy RStudio on EC2
 
-We will deploy the resources using cloudformation in us-west-2 region to your Event Engine account. Please navigate to [CloudFormation console](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template), select **Template is ready**, **Upload a template file**, and **Choose file** to upload the template yaml file [ec2_rstudio_sagemaker.yaml](./ec2_rstudio_sagemaker.yaml) provided to you. Hit **Next** to continue.
+We will deploy the resources using cloudformation in us-west-2 region to your Event Engine account. Please navigate to [CloudFormation console](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template), select **Template is ready**, **Upload a template file**, and **Choose file** to upload the template yaml file [ec2_ubuntu_rstudio_sagemaker.yaml](./ec2_ubuntu_rstudio_sagemaker.yaml) provided to you. Hit **Next** to continue.
 
 ![image](./doc/cloudformation_1.png)
 
-In Step 2 **Specify stack details**, you will be prompted to enter a **Stack name** and an **EC2 key pair**. Pick any name and select the key pair *ee-default-keypair.pem* from Event Engine then hit **Next**. 
+In Step 2 **Specify stack details**, you will be prompted to enter a **Stack name**, review and accept the [AGPL v3
+license](http://www.gnu.org/licenses/agpl-3.0-standalone.html) for installing RStudio Server, and select an **EC2 key pair**. Then hit **Next**. 
 
 In Step 3 **Configure stack options** page, we will bypass any options and keep default values, hit **Next**.
 
@@ -22,7 +23,7 @@ Once the stack creation completes, go to **Output** tab to find the RStudio IDE 
 
 ![cloudformation_5](./doc/cloudformation_5.png)
 
-Login the RStudio instance with username **rstudio** and password **rstudio**. [Note that this is a temporary environment for demonstration purposes. The use of public facing EC2 instance and simple login credential is *NOT* the best security practice to host your RStudio instance.]
+Login the RStudio instance with username **ubuntu** and password **rstudio7862**. [Note that this is a temporary environment for demonstration purposes. The use of public facing EC2 instance and simple login credential is *NOT* the best security practice to host your RStudio instance.]
 
 ### Lab 2: Create a Docker Container to run R scripts
 
@@ -94,7 +95,10 @@ then
 fi
 
 # Get the login command from ECR and execute it directly
-$(aws ecr get-login --region ${region} --no-include-email)
+aws ecr get-login-password --region ${region} \
+  | docker login \
+      --username AWS \
+      --password-stdin ${account}.dkr.ecr.${region}.amazonaws.com
 
 # Tag and push the local image to Amazon ECR
 docker tag ${image_name} ${fullname}
@@ -155,7 +159,7 @@ While the `Social_Distancing_Simulation.R` is executed within the container, the
 
 ![sm-processing-s3](https://docs.aws.amazon.com/sagemaker/latest/dg/images/Processing-1.png)
 
-### Clean up
+### Cleaning up
 
 Once we completed the workshop, please delete the stack from the [CloudFormation console](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks) by selecting the stack and hit **Delete**. This will clean up all the resources we have created for the workshop.
 

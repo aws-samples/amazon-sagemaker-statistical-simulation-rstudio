@@ -27,7 +27,10 @@ then
 fi
 
 # Get the login command from ECR and execute it directly
-$(aws ecr get-login --region ${region} --no-include-email)
+aws ecr get-login-password --region ${region} \
+  | docker login \
+      --username AWS \
+      --password-stdin ${account}.dkr.ecr.${region}.amazonaws.com
 
 # Tag and push the local image to Amazon ECR
 docker tag ${image_name} ${fullname}
