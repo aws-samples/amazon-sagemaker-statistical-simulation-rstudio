@@ -1,8 +1,6 @@
 # creates a layer from the ubuntu:16.04 Docker image.
 FROM ubuntu:16.04
 
-MAINTAINER AWS HCLS ML <aws-hcls-ml-sa@amazon.com>
-
 # builds up dependencies for the simulation
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
     wget \

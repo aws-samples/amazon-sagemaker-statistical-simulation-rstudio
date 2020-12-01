@@ -1,10 +1,10 @@
 library(reticulate)
 
-use_condaenv(condaenv = 'r-reticulate') # this is where we installed the SageMaker Python SDK
+use_python('/usr/bin/python') # this is where we installed the SageMaker Python SDK
 sagemaker <- import('sagemaker')
 session <- sagemaker$Session()
 bucket <- session$default_bucket()
-role_arn <- session$expand_role(role='sagemaker-service-role')
+role_arn <- sagemaker$get_execution_role()
 
 ## using r_container
 container <- 'URI TO CONTAINER AND TAG' # can be found under $ docker images. Remember to include the tag
@@ -27,11 +27,10 @@ num_people <- 1000
 
 is_local <- 0 #we are going to run this simulation with SageMaker processing
 result=processor$run(code = 'Social_Distancing_Simulations.R',
-              outputs=list(sagemaker$processing$ProcessingOutput(source='/opt/ml/processing/output')),
+              outputs = list(sagemaker$processing$ProcessingOutput(source='/opt/ml/processing/output')),
               arguments = list('--args', paste(x_length), paste(y_length), paste(num_people), paste(max_iterations),paste(is_local)),
               wait = TRUE,
-              logs=TRUE
-                )
+              logs = TRUE)
 
 get_job_results <- function(session,processor){
     #get the mean results of the simulation
