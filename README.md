@@ -139,7 +139,7 @@ processor$run(code = 'Social_Distancing_Simulations.R',
                                paste(max_iterations)))
 ```
 
-We will execute the code line by line in the RStudio with the script [sagemaker_processing_submission.R](./sagemaker_processing_submission.R) to submit 5 additional simulations.
+We will execute the code line by line in the RStudio with the script [SageMaker_Processing_SDS.R](./Submit_SageMaker_Processing_Job/SageMaker_Processing_SDS.R) to submit 5 additional simulations.
 
 In our simulation, we are not interacting with any data from a S3 bucket. If need be, you can specify data from a S3 bucket as input and save any processing/simulation output back to S3 by specifying `inputs` and `outputs` arguments in `processor$run()` call. For example,
 
