@@ -2,6 +2,8 @@
 
 RStudio is a great IDE for data scientists and statisticians who code in R. You can develop your statistical modeling, simulations and machine learning scripts in RStudio locally or on an EC2 and leverage SageMaker Training and Processing to distribute the execution of the scripts to a remote compute instance. In this workshop, we will walk through steps to build a docker container for a social distancing simulation program that uses parallelism, and run the simulation using SageMaker Processing from a RStudio IDE. 
 
+You can read more in the blog [Performing simulations at scale with Amazon SageMaker Processing and R on RStudio](https://aws.amazon.com/blogs/machine-learning/performing-simulations-at-scale-with-amazon-sagemaker-processing-and-r-on-rstudio/).
+
 ## Getting Started
 
 ### Lab 1: Deploy RStudio on EC2
